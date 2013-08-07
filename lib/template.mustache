@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width">
+    <style type="text/css">
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit}input,textarea,select{*font-size:100%}legend{color:#000}
+      body {
+        font: 14px/1.4 helvetica, arial;
+        background: #f6f6f6;
+        color: #333;
+      }
+      a:link, a:visited {
+        text-decoration: none;
+        color: #07c;
+      }
+      a:hover {
+        color: #333;
+      }
+      p {
+        margin: 0.9em 0;
+      }
+      strong {
+        font-weight: bold;
+      }
+      em {
+        font-style: italic;
+        color: #999;
+      }
+      pre, code {
+        font: 12px/16px menlo, monaco, courier, monospace;
+        border: 1px solid #e6e6e6;
+        border-radius: 4px;
+        background: #f6f6f6;
+        color: #356;
+      }
+      pre {
+        margin: 1em 0;
+        padding: 0.7em 0.8em;
+      }
+      code {
+        padding: 1px 4px;
+      }
+      dl {
+        overflow: auto;
+      }
+      dt, dd {
+        float: left;
+        padding-bottom: 0.5em;
+      }
+      dt {
+        clear: left;
+      }
+      dd {
+        padding-left: 0.5em;
+      }
+      h1, h2, h3, h4, h5 {
+        margin: 0 0 0.5em 0;
+        font-weight: bold;
+      }
+      h1 {
+        font-size: 24px;
+      }
+      h2 {
+        margin-top: 1em;
+        font-size: 20px;
+      }
+      h3 {
+        margin-top: 0.5em;
+        border-bottom: 2px solid #e6e6e6;
+        font-size: 16px;
+      }
+      h3 .label {
+        padding-top: 3px;
+        font-size: 12px;
+      }
+      .label {
+        padding: 2px 4px;
+        border-radius: 4px;
+        color: #fff;
+        background: #999;
+        font: bold 10px helvetica, arial, sans-serif;
+      }
+      .label.get {
+        background: #4ab948;
+      }
+      .label.post {
+        background: #d98a48;
+      }
+      .label.put {
+        background: #4a88b9;
+      }
+      .label.delete {
+        background: #b94a48;
+      }
+      .sidebar {
+        position: fixed;
+        padding: 10px 20px;
+        width: 200px;
+      }
+      .sidebar h4 {
+        margin: 0.5em 0 0 0;
+      }
+      .sidebar ul {
+        margin-bottom: 1em;
+      }
+      .sidebar li {
+        white-space: nowrap;
+        font: 12px/18px menlo, monaco, courier, monospace;
+      }
+      .content {
+        margin-left: 220px;
+        padding: 10px 20px;
+        border-left: 1px solid #e6e6e6;
+        background: #fff;
+      }
+      .endpoint {
+        margin-bottom: 2em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        {{#groups}}
+          <h4>{{name}}</h4>
+          <ul>
+            {{#endpoints}}
+              <li>
+                <a href="#{{html_anchor}}">
+                  <span class="label {{html_class}}">{{request_method}}</span>
+                  {{request_path}}
+                </a>
+              </li>
+            {{/endpoints}}
+          </ul>
+        {{/groups}}
+      </div>
+      <div class="content">
+        {{{blurb}}}
+        {{#groups}}
+          <h2>{{name}}</h2>
+          {{#endpoints}}
+            <div class="endpoint">
+              <h3 id="{{html_anchor}}">
+                <span class="label {{html_class}}">{{request_method}}</span>
+                {{request_path}}
+              </h3>
+              <p>{{{description}}}</p>
+              <h4>Parameters:</h4>
+              <dl>
+                {{#params}}
+                  <dt><code>{{name}}</code></dt>
+                  <dd>{{description}}{{#required}} <em>(required)</em>{{/required}}</dd>
+                {{/params}}
+              </dl>
+              {{#examples}}
+                <p><strong>Example:</strong> {{title}}</p>
+                <pre>{{request}}</pre>
+                <pre>{{response}}</pre>
+              {{/examples}}
+            </div>
+          {{/endpoints}}
+        {{/groups}}
+      </div>
+    </div>
+  </body>
+</html>
