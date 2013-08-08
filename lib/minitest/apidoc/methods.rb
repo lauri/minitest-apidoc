@@ -3,8 +3,10 @@ module MiniTest
     module Methods
       include Rack::Test::Methods
 
+      VERBS = %w[get head post put patch delete options]
+
       def _request(verb, uri, params={}, env={}, &block)
-        send("rack_test_#{verb}", uri, params)
+        send("rack_test_#{verb}", uri, params, env)
 
         self.class.metadata[:request] = "#{verb.upcase} #{last_request.fullpath}"
         self.class.metadata[:request] << $/ + last_request.body.read if last_request.body
@@ -21,7 +23,7 @@ module MiniTest
         block.call(response_data)
       end
 
-      %w[get post put patch delete options head].each do |verb|
+      VERBS.each do |verb|
         alias_method "rack_test_#{verb}", verb
         define_method(verb) do |uri, params={}, env={}, &block|
           _request(verb, uri, params, env, &block)

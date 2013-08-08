@@ -26,7 +26,7 @@ module Minitest
       def after_suites(suite, type)
         # TODO: find out where these empty endpoints come from
         @endpoints.reject! { |name, endpoint| endpoint.metadata.empty? }
-        groups = Group.from(@endpoints).sort_by(&:name)
+        groups = Group.from(@endpoints)
         Template.new(groups).write
       end
     end
