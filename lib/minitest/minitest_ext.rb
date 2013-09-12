@@ -32,5 +32,13 @@ module MiniTest
 end
 
 module Kernel
-  alias_method :document, :describe
+  # `document` is an alias for `describe` but it also declares the tests
+  # order-dependent. This is because we would like to have the documentation
+  # always in the same order.
+  def document(desc, additional_desc=nil, &block)
+    describe desc, additional_desc do
+      i_suck_and_my_tests_are_order_dependent!
+      self.instance_eval(&block)
+    end
+  end
 end
