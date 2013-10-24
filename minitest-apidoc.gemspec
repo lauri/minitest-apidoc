@@ -4,10 +4,10 @@ require 'minitest/apidoc/version'
 
 Gem::Specification.new do |gem|
   gem.name          = "minitest-apidoc"
-  gem.version       = MiniTest::Apidoc::VERSION
-  gem.authors       = ["Kovalo"]
-  gem.email         = ["team@kovalo.com"]
-  gem.description   = "Generate API documentation from MiniTest specs"
+  gem.version       = Minitest::Apidoc::VERSION
+  gem.email         = ["git@lap.fi"]
+  gem.authors       = gem.email
+  gem.description   = "Generate API documentation from Minitest specs"
   gem.summary       = gem.description
   gem.homepage      = "https://github.com/kovalo/minitest-apidoc"
 
@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'minitest-reporters'
-  gem.add_dependency 'rack-test'
+  gem.add_dependency 'minitest',  '~> 5.0.0'
+  gem.add_dependency 'rack-test', '~> 0.6.0'
   gem.add_dependency 'mustache'
 end

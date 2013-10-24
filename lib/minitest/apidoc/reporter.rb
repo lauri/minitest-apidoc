@@ -1,31 +1,30 @@
-require 'minitest/reporters'
-
 module Minitest
   module Apidoc
-    class Reporter
-      include MiniTest::Reporter
+    class Reporter < Minitest::Reporter
 
       def initialize
         @endpoints = {}
+        @tests = []
       end
 
-      def before_suite(suite)
-        @endpoints[suite.name] = Endpoint.new
-        @endpoints[suite.name].metadata = suite.metadata
-        @endpoints[suite.name].params = suite.params
+      def record(test)
+        if @tests.last.class != test.class
+          @endpoints[test.class] = Endpoint.new
+          @endpoints[test.class].metadata = test.class.metadata
+          @endpoints[test.class].params = test.class.params
+        end
+
+        if test.passed?
+          @endpoints[test.class].examples << {
+            :title    => test.class.metadata[:example_name],
+            :request  => test.class.metadata[:request],
+            :response => test.class.metadata[:response]
+          }
+        end
+        @tests << test
       end
 
-      def pass(suite, test, test_runner)
-        @endpoints[suite.name].examples << {
-          :title    => suite.metadata[:example_name],
-          :request  => suite.metadata[:request],
-          :response => suite.metadata[:response]
-        }
-      end
-
-      def after_suites(suite, type)
-        # TODO: find out where these empty endpoints come from
-        @endpoints.reject! { |name, endpoint| endpoint.metadata.empty? }
+      def passed?
         groups = Group.from(@endpoints)
         Template.new(groups).write
       end

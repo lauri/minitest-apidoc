@@ -1,4 +1,4 @@
-module MiniTest
+module Minitest
   module Apidoc
     class Endpoint
       attr_accessor :metadata, :params, :examples

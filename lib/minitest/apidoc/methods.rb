@@ -1,4 +1,7 @@
-module MiniTest
+require 'json'
+require 'rack/test'
+
+module Minitest
   module Apidoc
     module Methods
       include Rack::Test::Methods

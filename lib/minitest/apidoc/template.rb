@@ -1,6 +1,6 @@
 require 'mustache'
 
-module MiniTest
+module Minitest
   module Apidoc
     class Template < Mustache
       class << self

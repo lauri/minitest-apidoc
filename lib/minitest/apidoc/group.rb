@@ -1,4 +1,4 @@
-module MiniTest
+module Minitest
   module Apidoc
     class Group
       attr_accessor :name, :endpoints
@@ -11,12 +11,12 @@ module MiniTest
       # Takes a hash containing endpoint names as keys and endpoint objects as
       # values
       #
-      # {"Widgets::Index" => #<MiniTest::Apidoc::Endpoint>}, ...)
+      # {"Widgets::Index" => #<Minitest::Apidoc::Endpoint>}, ...)
       #
       # and turns it into an array containing group objects so that the
       # endpoints whose group attribute is the same are put in the same group.
       #
-      # [#<MiniTest::Apidoc::Group>, ...]
+      # [#<Minitest::Apidoc::Group>, ...]
       #
       # Sorts groups by name and endpoints within each group so that GETs are
       # first, then POSTs, PUTs, and so on. The template works with this array
