@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency 'minitest',  '~> 5.0.0'
+  gem.add_dependency 'minitest',  '>= 5.5.0'
   gem.add_dependency 'rack-test', '~> 0.6.0'
   gem.add_dependency 'mustache'
 end

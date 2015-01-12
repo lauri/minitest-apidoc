@@ -1,6 +1,9 @@
 module Minitest
   module Apidoc
     class Reporter < Minitest::Reporter
+      class << self
+        attr_accessor :enable_plugin
+      end
 
       def initialize
         @endpoints = {}
