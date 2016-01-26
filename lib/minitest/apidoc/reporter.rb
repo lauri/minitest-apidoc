@@ -6,6 +6,7 @@ module Minitest
       end
 
       def initialize
+        super
         @endpoints = {}
         @tests = []
       end
