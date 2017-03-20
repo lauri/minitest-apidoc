@@ -4,166 +4,249 @@
     <meta charset="utf-8">
     <title></title>
     <meta name="viewport" content="width=device-width">
-    <style type="text/css">
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit}input,textarea,select{*font-size:100%}legend{color:#000}
-      body {
-        font: 14px/1.4 helvetica, arial;
-        background: #f6f6f6;
-        color: #333;
+    <style>
+      * {
+        box-sizing: border-box;
       }
-      a:link, a:visited {
+      html, body, ul, li {
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        font: 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+        background: #fff;
+        color: #222;
+      }
+
+      h1, h2, h3, h4 {
+        margin: 0.5em 0 0.5em 0;
+        font-weight: 700;
+      }
+      h1 { font-size: 26px; margin-top: 0; }
+      h2 { font-size: 20px; }
+      h3 { font-size: 16px; border-bottom: 1px solid #e6e6e6; }
+      h4 { font-size: 14px; }
+
+      a {
         text-decoration: none;
-        color: #07c;
+        border-bottom: 2px solid #e6e6e6;
+        color: #888;
       }
       a:hover {
-        color: #333;
+        color: #222;
       }
-      p {
-        margin: 0.9em 0;
+
+      ul {
+        list-style: inside;
       }
-      strong {
-        font-weight: bold;
-      }
-      em {
-        font-style: italic;
-        color: #999;
-      }
-      pre, code {
-        font: 12px/16px menlo, monaco, courier, monospace;
-        border: 1px solid #e6e6e6;
-        border-radius: 4px;
-        background: #f6f6f6;
-        color: #356;
-      }
-      pre {
+
+      table {
         margin: 1em 0;
-        padding: 0.7em 0.8em;
+        border-collapse: collapse;
       }
-      code {
-        padding: 1px 4px;
+      th {
+        text-align: left;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: #888;
       }
-      dl {
-        overflow: auto;
+      td {
+        vertical-align: top;
+        padding-right: 1rem;
       }
-      dt, dd {
-        float: left;
-        padding-bottom: 0.5em;
+
+      blockquote {
+        margin: 0 0 1em 0;
+        padding: 10px 14px;
+        border-left: 2px solid #e6e6e6;
+        background: #f6f6f6;
       }
-      dt {
-        clear: left;
-      }
-      dd {
-        padding-left: 0.5em;
-      }
-      h1, h2, h3, h4, h5 {
-        margin: 0 0 0.5em 0;
-        font-weight: bold;
-      }
-      h1 {
-        font-size: 24px;
-      }
-      h2 {
-        margin-top: 1em;
-        font-size: 20px;
-      }
-      h3 {
-        margin-top: 0.5em;
-        border-bottom: 2px solid #e6e6e6;
-        font-size: 16px;
-      }
-      h3 .label {
-        padding-top: 3px;
+      blockquote a {
+        float: right;
         font-size: 12px;
       }
+      pre, code {
+        margin: 0;
+        font: 12px/1.4 Menlo, Monaco, Courier, monospace;
+        background: #f6f6f6;
+        color: #444;
+      }
+      pre.headers {
+        display: none;
+        color: #888;
+      }
+      pre.headers.visible {
+        display: block;
+      }
+      code {
+        padding: 2px 3px;
+      }
+
       .label {
+        display: inline-block;
+        width: 55px;
+        border-left-width: 2px;
+        border-left-style: solid;
         padding: 2px 4px;
-        border-radius: 4px;
-        color: #fff;
-        background: #999;
-        font: bold 10px helvetica, arial, sans-serif;
+        font-size: 11px;
+        color: #888;
       }
-      .label.get {
-        background: #4ab948;
+      h3 .label {
+        display: inline;
+        border-left: none;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+        font-size: 14px;
+        font-weight: 600;
       }
-      .label.post {
-        background: #d98a48;
+
+      .params strong {
+        margin-left: 0.5em;
+        font-size: 12px;
+        font-weight: normal;
+        text-transform: uppercase;
+        color: #888;
       }
-      .label.put {
-        background: #4a88b9;
-      }
-      .label.delete {
-        background: #b94a48;
-      }
+
+      .head     { border-color: #c1c1c1; }
+      .get      { border-color: #36d484; }
+      .post     { border-color: #32ccf4; }
+      .put      { border-color: #fec541; }
+      .patch    { border-color: #fd9252; }
+      .delete   { border-color: #fc5a7d; }
+      .options  { border-color: #7d6dfb; }
+
       .sidebar {
         position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 240px;
+        min-width: 240px;
+        border-right: 1px solid #e6e6e6;
         padding: 10px 20px;
-        width: 200px;
+        overflow-x: hidden;
+        overflow-y: auto;
       }
-      .sidebar h4 {
-        margin: 0.5em 0 0 0;
+      .content {
+        margin-left: 240px;
+        padding: 10px 20px;
       }
+
       .sidebar ul {
-        margin-bottom: 1em;
+        list-style: none;
       }
       .sidebar li {
         white-space: nowrap;
-        font: 12px/18px menlo, monaco, courier, monospace;
+        font: 12px Menlo, Monaco, Courier, monospace;
+      }
+      .sidebar li a {
+        display: block;
+        border: none;
+        padding: 2px 0;
+        color: #222;
+      }
+      .sidebar li a:hover {
+        color: #888;
       }
       .content {
-        margin-left: 220px;
         padding: 10px 20px;
-        border-left: 1px solid #e6e6e6;
-        background: #fff;
       }
       .endpoint {
-        margin-bottom: 2em;
+        margin-bottom: 3rem;
+      }
+
+      @media screen and (max-width: 735px) {
+        .sidebar {
+          display: none;
+        }
+        .content {
+          margin-left: 0 !important;
+        }
       }
     </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var sidebar = document.querySelector(".sidebar");
+        var content = document.querySelector(".content");
+        var toggles = document.querySelectorAll(".toggle-headers");
+
+        sidebar.style.width = "auto";
+        content.style.marginLeft = sidebar.scrollWidth + "px";
+
+        for (i = 0; i < toggles.length; i++) {
+          toggles[i].addEventListener("click", function(event) {
+            event.preventDefault();
+            var example = this.parentNode.parentNode;
+            example.querySelector(".request-headers").classList.toggle("visible");
+            example.querySelector(".response-headers").classList.toggle("visible");
+          });
+        }
+      });
+    </script>
   </head>
   <body>
-    <div class="container">
-      <div class="sidebar">
-        {{#groups}}
-          <h4>{{name}}</h4>
-          <ul>
-            {{#endpoints}}
-              <li>
-                <a href="#{{html_anchor}}">
-                  <span class="label {{html_class}}">{{request_method}}</span>
-                  {{request_path}}
-                </a>
-              </li>
-            {{/endpoints}}
-          </ul>
-        {{/groups}}
-      </div>
-      <div class="content">
-        {{{blurb}}}
-        {{#groups}}
-          <h2>{{name}}</h2>
+    <div class="sidebar">
+      {{#groups}}
+        <h4>{{name}}</h4>
+        <ul>
           {{#endpoints}}
-            <div class="endpoint">
-              <h3 id="{{html_anchor}}">
+            <li>
+              <a href="#{{html_anchor}}">
                 <span class="label {{html_class}}">{{request_method}}</span>
                 {{request_path}}
-              </h3>
-              <p>{{{description}}}</p>
-              <h4>Parameters:</h4>
-              <dl>
-                {{#params}}
-                  <dt><code>{{name}}</code></dt>
-                  <dd>{{description}}{{#required}} <em>(required)</em>{{/required}}</dd>
-                {{/params}}
-              </dl>
-              {{#examples}}
-                <p><strong>Example:</strong> {{title}}</p>
-                <pre>{{request}}</pre>
-                <pre>{{response}}</pre>
-              {{/examples}}
-            </div>
+              </a>
+            </li>
           {{/endpoints}}
-        {{/groups}}
-      </div>
+        </ul>
+      {{/groups}}
+    </div>
+    <div class="content">
+      {{{blurb}}}
+      {{#groups}}
+        <h2>{{name}}</h2>
+        {{#endpoints}}
+          <div class="endpoint">
+            <h3 id="{{html_anchor}}">
+              <span class="label {{html_class}}">{{request_method}}</span>
+              {{request_path}}
+            </h3>
+            <p>{{{description}}}</p>
+            {{#params?}}
+            <h4>Parameters</h4>
+            <table class="params">
+              {{#params}}
+                <tr>
+                  <td>
+                    <code>{{name}}</code>
+                  </td>
+                  <td>
+                    {{{description}}}
+                    {{#default}}<strong>Default: </strong><code>{{default}}</code>{{/default}}
+                    {{#required}}<strong>Required</strong>{{/required}}
+                  </td>
+                </tr>
+              {{/params}}
+            </table>
+            {{/params?}}
+            {{#examples}}
+              <div class="example">
+                <h4>Example</h4>
+                {{#name}}<p>{{name}}</p>{{/name}}
+                <blockquote class="{{html_class}}">
+                  <a href="#" class="toggle-headers">Toggle headers</a>
+                  <pre>{{request_method}} {{request_path}}</pre>
+                  <pre class="headers request-headers">{{request_headers}}</pre>
+                  <pre>{{request_body}}</pre>
+                </blockquote>
+                <blockquote>
+                  <pre class="headers response-headers">{{response_status}}<br>{{response_headers}}</pre>
+                  <pre>{{response_body}}</pre>
+                </blockquote>
+              </div>
+            {{/examples}}
+          </div>
+        {{/endpoints}}
+      {{/groups}}
     </div>
   </body>
 </html>

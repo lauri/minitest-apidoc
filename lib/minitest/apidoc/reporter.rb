@@ -1,3 +1,8 @@
+require "minitest/apidoc/group"
+require "minitest/apidoc/example"
+require "minitest/apidoc/endpoint"
+require "minitest/apidoc/template"
+
 module Minitest
   module Apidoc
     class Reporter < Minitest::Reporter
@@ -13,18 +18,13 @@ module Minitest
 
       def record(test)
         if @tests.last.class != test.class
-          @endpoints[test.class] = Endpoint.new
-          @endpoints[test.class].metadata = test.class.metadata
-          @endpoints[test.class].params = test.class.params
+          @endpoints[test.class] = Endpoint.new(test.class)
         end
 
         if test.passed?
-          @endpoints[test.class].examples << {
-            :title    => test.class.metadata[:example_name],
-            :request  => test.class.metadata[:request],
-            :response => test.class.metadata[:response]
-          }
+          @endpoints[test.class].examples << Example.new(test.class)
         end
+
         @tests << test
       end
 

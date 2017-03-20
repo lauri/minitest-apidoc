@@ -9,7 +9,7 @@ module Minitest
         @params ||= []
       end
 
-      def example(desc, &block)
+      def example(desc=nil, &block)
         it desc do
           self.class.metadata[:example_name] = desc
           self.instance_eval(&block)
@@ -17,11 +17,11 @@ module Minitest
       end
 
       def meta(key, value)
-        self.metadata[key] = value
+        metadata[key] = value
       end
 
       def param(name, description, options={})
-        self.params << {:name => name, :description => description}.merge(options)
+        params << {name: name, description: description}.merge(options)
       end
     end
   end

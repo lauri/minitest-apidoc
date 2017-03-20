@@ -18,16 +18,16 @@ module Minitest
       #
       # [#<Minitest::Apidoc::Group>, ...]
       #
-      # Sorts groups by name and endpoints within each group so that GETs are
-      # first, then POSTs, PUTs, and so on. The template works with this array
-      # to display the documentation.
+      # Sorts groups by name and endpoints within each group as specified by
+      # Endpoint#sort_index. The template works with this array to display the
+      # documentation.
       def self.from(endpoint_hash)
-        sorted_endpoints = endpoint_hash.values.sort_by do |endpoint|
-          Methods::VERBS.index(endpoint.request_method.downcase)
-        end
-        grouped_endpoints = sorted_endpoints.group_by { |endpoint| endpoint.group }
-        groups = grouped_endpoints.map { |group, endpoints| Group.new(group, endpoints) }
-        groups.sort_by(&:name)
+        endpoint_hash
+          .values
+          .sort_by(&:sort_index)
+          .group_by { |endpoint| endpoint.group }
+          .map { |name, endpoints| Group.new(name, endpoints) }
+          .sort_by(&:name)
       end
     end
   end

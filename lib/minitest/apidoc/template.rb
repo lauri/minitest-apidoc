@@ -1,4 +1,4 @@
-require 'mustache'
+require "mustache"
 
 module Minitest
   module Apidoc
@@ -9,7 +9,7 @@ module Minitest
 
       attr_reader :groups
 
-      self.template_file = File.expand_path("../../template.mustache", File.dirname(__FILE__))
+      self.template_file = File.expand_path("../../../template.mustache", __FILE__)
       self.output_file = "apidoc.html"
 
       def initialize(groups)
@@ -21,9 +21,7 @@ module Minitest
       end
 
       def write
-        File.open(self.class.output_file, "w") do |file|
-          file.write(render)
-        end
+        File.write(self.class.output_file, render)
       end
     end
   end
