@@ -6,7 +6,7 @@ It depends on [Minitest](https://github.com/seattlerb/minitest) and [Rack::Test]
 
 See an [example of generated documentation](http://htmlpreview.github.io/?https://github.com/lauri/krack-apidoc-example/blob/master/doc/index.html).
 
-See an [example of what the test code looks like](https://github.com/lauri/krack-apidoc-example/blob/master/spec/albums/index_spec.rb).
+See an [example of what the test code looks like](https://github.com/lauri/krack-apidoc-example/blob/master/spec/endpoints/albums/index_spec.rb).
 
 See an [entire example application](https://github.com/lauri/krack-apidoc-example).
 
