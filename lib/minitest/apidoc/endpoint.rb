@@ -13,12 +13,12 @@ module Minitest
       # prefer that. If not, grab the request method that was actually used by
       # rack-test (stored in the example).
       def request_method
-        @metadata[:request_method] || @examples.first.request_method
+        @metadata[:request_method] || @examples[0].request_method
       end
 
       # Ditto
       def request_path
-        @metadata[:request_path] || @examples.first.request_path
+        @metadata[:request_path] || @examples[0].request_path.split("?")[0]
       end
 
       def html_anchor
