@@ -4,7 +4,7 @@ This library allows you to generate API documentation for your Rack-based applic
 
 It depends on [Minitest](https://github.com/seattlerb/minitest) and [Rack::Test](https://github.com/brynary/rack-test).
 
-See an [example of generated documentation](http://htmlpreview.github.io/?https://github.com/lauri/krack-apidoc-example/blob/master/doc/index.html).
+See an [example of generated documentation](http://htmlpreview.github.io/?https://raw.githubusercontent.com/lauri/krack-apidoc-example/master/doc/index.html).
 
 See an [example of what the test code looks like](https://github.com/lauri/krack-apidoc-example/blob/master/spec/endpoints/albums/index_spec.rb).
 
