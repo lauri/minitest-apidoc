@@ -25,6 +25,18 @@ module Minitest
       end
     end
   end
+
+  class Result < Runnable
+    attr_accessor :test_class
+
+    class << self
+      alias :__from__ :from
+
+      def from(runnable)
+        __from__(runnable).tap { |r| r.test_class = runnable.class }
+      end
+    end
+  end
 end
 
 module Kernel

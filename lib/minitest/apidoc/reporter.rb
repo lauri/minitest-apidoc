@@ -13,19 +13,14 @@ module Minitest
       def initialize
         super
         @endpoints = {}
-        @tests = []
       end
 
-      def record(test)
-        if @tests.last.class != test.class
-          @endpoints[test.class] = Endpoint.new(test.class)
-        end
+      def record(result)
+        @endpoints[result.test_class] ||= Endpoint.new(result.test_class)
 
-        if test.passed?
-          @endpoints[test.class].examples << Example.new(test.class)
+        if result.passed?
+          @endpoints[result.test_class].examples << Example.new(result.test_class)
         end
-
-        @tests << test
       end
 
       def passed?
